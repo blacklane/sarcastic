@@ -138,6 +138,25 @@ let either = /*:: <A, B> */ (assertionA /*: Assertion<A> */, assertionB /*: Asse
   };
 };
 
+let literal = /*:: <T: string | number> */ (literalValue /*:T */) /*: Assertion<T> */ => {
+  return (val /*: any*/, name /*: string*/) => {
+    // $FlowFixMe
+    if (val === literalValue) return val;
+    throw new AssertionError(`a literal<${literalValue}>`, name, val);
+  };
+};
+
+let literals = /*:: <T: string | number> */ (literalValues /*:Array<T> */) /*: Assertion<T> */ => {
+  return (val /*: any*/, name /*: string*/) => {
+    for (let i = 0; i < literalValues.length; i++) {
+      const literalValue = literalValues[i];
+      // $FlowFixMe
+      if (val === literalValue) return val;
+    }
+    throw new AssertionError(`a literal<${literalValues.join('|')}>`, name, val);
+  };
+};
+
 is.is = is;
 is.boolean = boolean;
 is.number = number;
@@ -152,6 +171,8 @@ is.shape = shape;
 is.maybe = maybe;
 is.default = _default;
 is.either = either;
+is.literal = literal;
+is.literals = literals;
 is.AssertionError = AssertionError;
 
 module.exports = is;

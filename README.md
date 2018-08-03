@@ -196,3 +196,22 @@ try {
   }
 }
 ```
+
+### `is.literal(stringLiteral)`
+
+```js
+(is('a', is.literal/*::<'a'> */('a')) // returns 'a'
+is(42, is.literal/*::<'a'> */('a'), '42') // throws instanceof is.AssertionError
+```
+
+### `is.literals(arrayOfStringLiterals)`
+
+```js
+let literalsAssertion = is.literals/*::<'a'|'b'|'c'>*/([
+  'a', 'b', 'c'
+]);
+is('a', literalsAssertion) // returns 'a'
+is('b', literalsAssertion) // returns 'b'
+is('c', literalsAssertion) // returns 'c'
+is(42, literalsAssertion) // throws instanceof is.AssertionError
+```
