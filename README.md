@@ -200,14 +200,43 @@ try {
 ### `is.literal(stringLiteral)`
 
 ```js
-(is('a', is.literal/*::<'a'> */('a')) // returns 'a'
-is(42, is.literal/*::<'a'> */('a'), '42') // throws instanceof is.AssertionError
+is('a', is.literal('a')) // returns 'a'
+is(42, is.literal('a')) // throws instanceof is.AssertionError
+```
+
+**With strict typing:**
+
+```js
+let literalAssetion = is.literal<'a'>('a');
+// or if syntax above doesn't work due to JSX, Prettier, ESLint etc
+import { type Assertion } from 'sarcastic';
+let literalAssetion: Assertion<'a'> = is.literal('a');
+
+is('a', literalAssetion) // returns 'a'
+is(42, is.literal<'a'>('a')) // throws instanceof is.AssertionError
 ```
 
 ### `is.literals(arrayOfStringLiterals)`
 
 ```js
-let literalsAssertion = is.literals/*::<'a'|'b'|'c'>*/([
+let literalsAssertion = is.literals([
+  'a', 'b', 'c'
+]);
+is('a', literalsAssertion) // returns 'a'
+is('b', literalsAssertion) // returns 'b'
+is('c', literalsAssertion) // returns 'c'
+is(42, literalsAssertion) // throws instanceof is.AssertionError
+```
+
+**With strict typing:**
+
+```js
+let literalsAssertion = is.literals<'a'|'b'|'c'>([
+  'a', 'b', 'c'
+]);
+// or if syntax above doesn't work due to JSX, Prettier, ESLint etc
+import { type Assertion } from 'sarcastic';
+let literalsAssertion: Assertion<'a'|'b'|'c'> = is.literals<'a'|'b'|'c'>([
   'a', 'b', 'c'
 ]);
 is('a', literalsAssertion) // returns 'a'

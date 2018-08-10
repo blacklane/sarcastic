@@ -2,7 +2,7 @@
 // @flow
 
 /*::
-type Assertion<T> = (val: mixed, name: string) => T;
+export type Assertion<T> = (val: mixed, name: string) => T;
 type AssertionMap = { [key: string]: Assertion<any> };
 type ExtractAssertionType = <T>(Assertion<T>) => T;
 type AssertionResultMap<T> = $ObjMap<T, ExtractAssertionType>;
