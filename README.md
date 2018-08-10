@@ -1,4 +1,4 @@
-# Sarcastic
+# Sarcastic [![Build Status](https://travis-ci.com/blacklane/sarcastic.svg?branch=blacklane)](https://travis-ci.com/blacklane/sarcastic)
 
 > Cast unknown values to typed values
 
